@@ -29,6 +29,13 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
 //    let fontScrollView: UIScrollView!
 //    let buttonList = [UIButton]
     
+    @IBAction func fontButton(sender: AnyObject) {
+        
+        toggleSideMenuView()
+        
+        self.addSubView()
+
+    }
     
     
 

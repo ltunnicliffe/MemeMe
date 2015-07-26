@@ -69,6 +69,11 @@
                                             <action selector="save:" destination="vXZ-lx-hvc" id="DN8-eX-ugf"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="Font" id="ZLN-fz-LUq">
+                                        <connections>
+                                            <action selector="fontButton:" destination="vXZ-lx-hvc" id="1hY-cB-8N3"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="F1J-F6-dc5"/>
                                     <barButtonItem systemItem="organize" id="C6L-zg-n1F">
                                         <connections>
