@@ -10,7 +10,7 @@
 import UIKit
 
 
-class EditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var topTextField: UITextField!
@@ -19,10 +19,15 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet var topToolBar: UIToolbar!
     @IBOutlet var bottomToolBar: UIToolbar!
     @IBOutlet var cameraButton: UIBarButtonItem!
+    
 
     //Creates an instance of the UIImagePickerController
     let pickController = UIImagePickerController()
     let textFieldDelegate = TextFieldDelegate()
+    let menuView = UIView()
+    let barWidth:CGFloat = 150.0
+
+    
 
     
 //
@@ -31,10 +36,13 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBAction func fontButton(sender: AnyObject) {
         
-        toggleSideMenuView()
+ toggleSideMenuView()
+    }
+    
+    func toggleSideMenuView(){
+        menuView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, barWidth, imageView.frame.size.height)
+        menuView.backgroundColor = UIColor.purpleColor()
         
-        self.addSubView()
-
     }
     
     
@@ -97,7 +105,24 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.bottomTextField.delegate = textFieldDelegate
         textFieldSetter()
         sendMeme.enabled = false
+
     }
+    
+    
+    // MARK: - ENSideMenu Delegate
+    func sideMenuWillOpen() {
+        println("sideMenuWillOpen")
+    }
+    
+    func sideMenuWillClose() {
+        println("sideMenuWillClose")
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        println("sideMenuShouldOpenSideMenu")
+        return true
+    }
+
     
    
     
