@@ -17,7 +17,7 @@ class TextFieldDelegate: NSObject, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
 
-        return true;
+        return true
 
     }
     //This delegate does not allow the user to edit existing text. If this method is absent then when you tap the text field,  you can edit the existing text. In addition, when this method is present, an x appears in the right of the textfield box.

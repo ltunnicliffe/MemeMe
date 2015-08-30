@@ -14,40 +14,43 @@ import UIKit
 //http://www.raywenderlich.com/78568/create-slide-out-navigation-panel-swift
 
 
-
 class MemeTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
+    
+    
+    @IBOutlet var tableView: UITableView!
     
     var memes:[Meme]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        var editorButton2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "editorView")
+        navigationItem.rightBarButtonItem = editorButton2
+        navigationItem.leftBarButtonItem = editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         memes = applicationDelegate.memes
-        var editorButton2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "editorView")
-        self.navigationItem.rightBarButtonItem = editorButton2
-        self.navigationItem.leftBarButtonItem = editButtonItem()
-
+        tableView.reloadData()
+        println(memes)
     }
     
     func editorView(){
     
-    let editorViewController = self.storyboard!.instantiateViewControllerWithIdentifier("EditorViewController") as! EditorViewController
-    self.navigationController!.pushViewController(editorViewController, animated: true)
-
-        self.tabBarController?.tabBar.hidden = true
-        self.navigationController?.navigationBar.hidden = true
+    let editorViewController = storyboard!.instantiateViewControllerWithIdentifier("EditorViewController") as! EditorViewController
+        navigationController!.pushViewController(editorViewController, animated: true)
+        tabBarController?.tabBar.hidden = true
+        navigationController?.navigationBar.hidden = true
         
     }
     
      func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
             // Delete the row from the data source
-            self.memes.removeAtIndex(indexPath.row)
+            memes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            tableView.reloadData()
         }
     }
     
@@ -58,30 +61,24 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.memes.count
+        return memes.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeCell") as! UITableViewCell
-        let mymeme = self.memes[indexPath.row]
-        
+        let mymeme = memes[indexPath.row]
         // Set the name and image
         cell.textLabel?.text = mymeme.topText
         cell.imageView?.image = mymeme.memedImage
-        
-               return cell
+        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+        let detailController = storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
         detailController.bigMeme = self.memes[indexPath.row]
-        self.navigationController!.pushViewController(detailController, animated: true)
-        
+        detailController.indexNumber = indexPath.row
+        navigationController!.pushViewController(detailController, animated: true)
     }
     
-    
-    
-    
+  
 }

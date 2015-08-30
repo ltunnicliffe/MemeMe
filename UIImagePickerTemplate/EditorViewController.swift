@@ -20,38 +20,36 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet var bottomToolBar: UIToolbar!
     @IBOutlet var cameraButton: UIBarButtonItem!
     
+    
+    var indexNumber:Int?
+    var bigMeme: Meme?
+    var memes:[Meme]!
 
+    
+    
+    
+
+    
     //Creates an instance of the UIImagePickerController
     let pickController = UIImagePickerController()
     let textFieldDelegate = TextFieldDelegate()
     let menuView = UIView()
     let barWidth:CGFloat = 150.0
-
-    
-
-    
-//
-//    let fontScrollView: UIScrollView!
-//    let buttonList = [UIButton]
     
     @IBAction func fontButton(sender: AnyObject) {
-        
- toggleSideMenuView()
+        toggleSideMenuView()
     }
     
     func toggleSideMenuView(){
         menuView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, barWidth, imageView.frame.size.height)
         menuView.backgroundColor = UIColor.purpleColor()
-        
     }
-    
-    
 
     @IBAction func takePicture(sender: AnyObject) {
         pickController.allowsEditing = false
         pickController.sourceType = UIImagePickerControllerSourceType.Camera
         sendMeme.enabled = true
-        self.presentViewController(pickController, animated: true, completion: nil)
+        presentViewController(pickController, animated: true, completion: nil)
     }
     
     @IBAction func picker(sender: AnyObject) {
@@ -59,19 +57,22 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         pickController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         sendMeme.enabled = true
         //Button is given an action that allows it to present the image picker view.
-        self.presentViewController(pickController, animated: true, completion: nil)
+        presentViewController(pickController, animated: true, completion: nil)
     }
 
+        //This function is here because it would be useful to save a meme, even when you don't want to send it to someone.
     @IBAction func save(sender: AnyObject) {
         let image:UIImage = generateMemedImage()
         save()
     }
+    
     @IBAction func sendMeme(sender: AnyObject) {
         let image:UIImage = generateMemedImage()
         let nextController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        self.presentViewController(nextController, animated: true, completion: nil)
+        presentViewController(nextController, animated: true, completion: nil)
         nextController.completionWithItemsHandler = {(activityType, completed:Bool, returnedItems,activityError) in
             if !completed {
+                    //I think that the Meme would also be saved here when a Meme is sent because save is also called here.
                 self.save()
                 println("save called!")
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -84,7 +85,8 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
         imageView.image = pickedImage
         //Makes sure the picture conforms to its aspect ratio
-        imageView.contentMode = .ScaleAspectFill
+        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        imageView.center = view.center
         //Goes back to the original UIImageView screen
         dismissViewControllerAnimated(true, completion: nil)
         }
@@ -101,10 +103,21 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
         //Sets this view controller to be the delegate for UIImagePicker.
         pickController.delegate = self
-        self.topTextField.delegate = textFieldDelegate
-        self.bottomTextField.delegate = textFieldDelegate
+        topTextField.delegate = textFieldDelegate
+        bottomTextField.delegate = textFieldDelegate
         textFieldSetter()
         sendMeme.enabled = false
+        
+        if (indexNumber != nil) {
+            
+            let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+            memes = applicationDelegate.memes
+            bigMeme = memes[indexNumber!]
+            topTextField.text = bigMeme!.topText
+            bottomTextField.text = bigMeme!.bottomText
+            imageView.image = bigMeme!.mainImage
+        }
+        
 
     }
     
@@ -123,10 +136,6 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         return true
     }
 
-    
-   
-    
-    
     
     //Sets the text of the text field and calls the textFieldMaker function.
     func textFieldSetter() {
@@ -151,12 +160,12 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewWillAppear(animated)
     //If the camera is not enabled, then the user will not be able to press the camera button.
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
     func subscribeToKeyboardNotifications() {
@@ -172,13 +181,16 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func keyboardWillShow(notification: NSNotification) {
-      //  self.view.frame.origin.y -= getKeyboardHeight(notification)
-        self.view.frame.origin.y = -getKeyboardHeight(notification)
+        
+        if bottomTextField.isFirstResponder() {
+            view.frame.origin.y = -getKeyboardHeight(notification)
+        }
+        
     }
     
     func keyboardWillHide(notification: NSNotification) {
         //resets the code independent of the getKeyboardHeight method
-        self.view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
@@ -189,16 +201,28 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     func save() {
         //Create the meme
-        var meme = Meme( topText: topTextField.text, bottomText: bottomTextField.text, mainImage: imageView.image, memedImage:generateMemedImage())
-        (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        
+        if (indexNumber != nil) {
+            let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+            applicationDelegate.memes[indexNumber!].topText = topTextField.text
+            applicationDelegate.memes[indexNumber!].bottomText = bottomTextField.text
+            applicationDelegate.memes[indexNumber!].mainImage = imageView.image
+            applicationDelegate.memes[indexNumber!].memedImage = generateMemedImage()
+        }
+        else {
+            var meme = Meme( topText: topTextField.text, bottomText: bottomTextField.text, mainImage: imageView.image, memedImage:generateMemedImage())
+            (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        }
+        
+        
     }
     
     func generateMemedImage() -> UIImage {
         topToolBar.hidden = true
         bottomToolBar.hidden = true
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame,
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame,
             afterScreenUpdates: true)
         let memedImage : UIImage =
         UIGraphicsGetImageFromCurrentImageContext()

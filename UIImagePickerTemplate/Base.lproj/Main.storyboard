@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kIv-VL-fr6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kIv-VL-fr6">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -175,7 +175,7 @@
         <!--Meme Table View Controller-->
         <scene sceneID="j3H-NW-w7h">
             <objects>
-                <viewController id="I7a-t3-p3g" customClass="MemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TableViewController" id="I7a-t3-p3g" customClass="MemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HiP-8c-EI8"/>
                         <viewControllerLayoutGuide type="bottom" id="LaY-V3-HTj"/>
@@ -208,16 +208,19 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="BqO-Fo-GZR"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tableView" destination="Jo7-R5-dB3" id="lBo-85-Tka"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bwd-oJ-XGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2206" y="376"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="8YG-TA-ZGJ">
             <objects>
                 <navigationController id="1TY-KT-Ftt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="NMJ-4Z-NmV"/>
+                    <tabBarItem key="tabBarItem" systemItem="mostRecent" id="NMJ-4Z-NmV"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="s2b-vU-WwE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -231,11 +234,11 @@
             </objects>
             <point key="canvasLocation" x="1410" y="369"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="KJz-xm-EwU">
             <objects>
                 <navigationController id="qWA-A7-EVq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="7GD-al-89h"/>
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="7GD-al-89h"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fXt-dQ-FwR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -263,6 +266,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z5c-Xb-HCa">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <color key="backgroundColor" red="0.95948394493071931" green="0.41364468472154281" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JC8-4A-fJP">
                                     <size key="itemSize" width="129" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -334,6 +338,24 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <items/>
                             </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTt-Vk-hFj">
+                                <rect key="frame" x="138" y="257" width="44" height="30"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteButton:" destination="gbs-Jd-AhD" eventType="touchUpInside" id="pbr-xe-gvf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vb3-Y7-IIK">
+                                <rect key="frame" x="145" y="219" width="30" height="30"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="editorButton:" destination="gbs-Jd-AhD" eventType="touchUpInside" id="wlC-ee-0y5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
