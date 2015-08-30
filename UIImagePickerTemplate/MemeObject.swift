@@ -12,27 +12,11 @@ import UIKit
 
 struct Meme{
     
-    let topText: String
-    let bottomText: String
-    let mainImage: UIImage!
-    let memedImage: UIImage!
+    var topText: String
+    var bottomText: String
+    var mainImage: UIImage!
+    var memedImage: UIImage!
     
-
-    
-    
-    init(topText:String, bottomText: String, mainImage: UIImage!, memedImage:UIImage! ) {
-        
-        self.topText = topText
-        self.bottomText = bottomText
-        self.mainImage = mainImage
-        self.memedImage = memedImage
-        
-
-    }
-
-
-
-
 }
 
 

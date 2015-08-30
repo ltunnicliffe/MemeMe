@@ -70,6 +70,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC79E0911B64DC4900E2FB5E /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Side Menu";
+			sourceTree = "<group>";
+		};
 		ACDA9D2C1B2E440B0085636D = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +98,7 @@
 		ACDA9D371B2E440B0085636D /* UIImagePickerTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				AC79E0911B64DC4900E2FB5E /* Side Menu */,
 				ACDA9D3A1B2E440B0085636D /* AppDelegate.swift */,
 				AC6AE0131B45827A00C414F5 /* MemeObject.swift */,
 				ACDA9D3C1B2E440B0085636D /* EditorViewController.swift */,
