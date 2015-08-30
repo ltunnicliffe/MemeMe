@@ -69,11 +69,6 @@
                                             <action selector="save:" destination="vXZ-lx-hvc" id="DN8-eX-ugf"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Font" id="ZLN-fz-LUq">
-                                        <connections>
-                                            <action selector="fontButton:" destination="vXZ-lx-hvc" id="1hY-cB-8N3"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="F1J-F6-dc5"/>
                                     <barButtonItem systemItem="organize" id="C6L-zg-n1F">
                                         <connections>
@@ -338,8 +333,8 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <items/>
                             </toolbar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTt-Vk-hFj">
-                                <rect key="frame" x="138" y="257" width="44" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTt-Vk-hFj">
+                                <rect key="frame" x="260" y="42" width="44" height="30"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -347,8 +342,8 @@
                                     <action selector="deleteButton:" destination="gbs-Jd-AhD" eventType="touchUpInside" id="pbr-xe-gvf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vb3-Y7-IIK">
-                                <rect key="frame" x="145" y="193" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vb3-Y7-IIK">
+                                <rect key="frame" x="16" y="42" width="30" height="30"/>
                                 <state key="normal" title="Edit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -361,9 +356,13 @@
                         <constraints>
                             <constraint firstItem="ejt-es-8pH" firstAttribute="leading" secondItem="Ukq-cv-sAS" secondAttribute="leadingMargin" constant="-16" id="1BP-Jc-KBg"/>
                             <constraint firstItem="JJn-dS-btY" firstAttribute="top" secondItem="ejt-es-8pH" secondAttribute="bottom" id="9S1-W4-JHC"/>
+                            <constraint firstItem="cTt-Vk-hFj" firstAttribute="trailing" secondItem="Ukq-cv-sAS" secondAttribute="trailingMargin" id="Cge-Yn-iTf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ejt-es-8pH" secondAttribute="trailing" constant="-16" id="Edl-ZN-cYk"/>
                             <constraint firstItem="hFm-3P-GI2" firstAttribute="top" secondItem="Ukq-cv-sAS" secondAttribute="topMargin" id="Idl-yh-Wdv"/>
+                            <constraint firstItem="hFm-3P-GI2" firstAttribute="top" secondItem="vb3-Y7-IIK" secondAttribute="bottom" constant="-52" id="MWk-AO-HSi"/>
+                            <constraint firstItem="hFm-3P-GI2" firstAttribute="top" secondItem="cTt-Vk-hFj" secondAttribute="bottom" constant="-52" id="XWv-Ad-56y"/>
                             <constraint firstItem="hFm-3P-GI2" firstAttribute="leading" secondItem="Ukq-cv-sAS" secondAttribute="leadingMargin" constant="-16" id="a7k-UT-Txk"/>
+                            <constraint firstItem="vb3-Y7-IIK" firstAttribute="leading" secondItem="Ukq-cv-sAS" secondAttribute="leadingMargin" id="bSb-IY-fjm"/>
                             <constraint firstItem="ejt-es-8pH" firstAttribute="top" secondItem="hFm-3P-GI2" secondAttribute="bottom" id="bol-DJ-5s6"/>
                             <constraint firstItem="hFm-3P-GI2" firstAttribute="top" secondItem="7Zk-C8-0O5" secondAttribute="bottom" id="cbK-LS-W1k"/>
                             <constraint firstItem="JJn-dS-btY" firstAttribute="top" secondItem="hFm-3P-GI2" secondAttribute="bottom" constant="50" id="pEb-AI-2AP"/>

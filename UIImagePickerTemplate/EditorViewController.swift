@@ -26,24 +26,10 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
     var memes:[Meme]!
 
     
-    
-    
-
-    
     //Creates an instance of the UIImagePickerController
     let pickController = UIImagePickerController()
     let textFieldDelegate = TextFieldDelegate()
-    let menuView = UIView()
-    let barWidth:CGFloat = 150.0
     
-    @IBAction func fontButton(sender: AnyObject) {
-        toggleSideMenuView()
-    }
-    
-    func toggleSideMenuView(){
-        menuView.frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, barWidth, imageView.frame.size.height)
-        menuView.backgroundColor = UIColor.purpleColor()
-    }
 
     @IBAction func takePicture(sender: AnyObject) {
         pickController.allowsEditing = false
@@ -121,21 +107,6 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     }
     
-    
-    // MARK: - ENSideMenu Delegate
-    func sideMenuWillOpen() {
-        println("sideMenuWillOpen")
-    }
-    
-    func sideMenuWillClose() {
-        println("sideMenuWillClose")
-    }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        println("sideMenuShouldOpenSideMenu")
-        return true
-    }
-
     
     //Sets the text of the text field and calls the textFieldMaker function.
     func textFieldSetter() {
