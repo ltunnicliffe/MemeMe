@@ -70,7 +70,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="F1J-F6-dc5"/>
-                                    <barButtonItem title="Cancel" id="Gcg-i6-rD6">
+                                    <barButtonItem title="Back" id="Gcg-i6-rD6" userLabel="Back">
                                         <connections>
                                             <action selector="cancelButton:" destination="vXZ-lx-hvc" id="xxt-9y-WUr"/>
                                         </connections>
