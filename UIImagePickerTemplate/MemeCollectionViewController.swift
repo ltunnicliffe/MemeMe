@@ -38,6 +38,7 @@ class MemeCollectionViewController : UIViewController, UICollectionViewDelegate,
         
         let detailController = storyboard!.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
         detailController.bigMeme = self.memes[indexPath.row]
+        detailController.indexNumber = indexPath.row
         navigationController!.pushViewController(detailController, animated: true)
         
     }
