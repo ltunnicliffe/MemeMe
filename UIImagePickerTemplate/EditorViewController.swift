@@ -30,6 +30,9 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
     let pickController = UIImagePickerController()
     let textFieldDelegate = TextFieldDelegate()
     
+    @IBAction func cancelButton(sender: AnyObject) {
+        cancelView()
+    }
 
     @IBAction func takePicture(sender: AnyObject) {
         pickController.allowsEditing = false
@@ -93,9 +96,7 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
         bottomTextField.delegate = textFieldDelegate
         textFieldSetter()
         sendMeme.enabled = false
-        
         if (indexNumber != nil) {
-            
             let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
             memes = applicationDelegate.memes
             bigMeme = memes[indexNumber!]
@@ -103,8 +104,10 @@ class EditorViewController: UIViewController, UIImagePickerControllerDelegate, U
             bottomTextField.text = bigMeme!.bottomText
             imageView.image = bigMeme!.mainImage
         }
-        
-
+    }
+    
+    func cancelView(){
+        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     

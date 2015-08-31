@@ -37,12 +37,8 @@ class MemeTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func editorView(){
-    
-    let editorViewController = storyboard!.instantiateViewControllerWithIdentifier("EditorViewController") as! EditorViewController
-        navigationController!.pushViewController(editorViewController, animated: true)
-        tabBarController?.tabBar.hidden = true
-        navigationController?.navigationBar.hidden = true
-        
+        let editorViewController = storyboard!.instantiateViewControllerWithIdentifier("EditorViewController") as! EditorViewController
+        presentViewController(editorViewController, animated: true, completion: nil)
     }
     
      func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

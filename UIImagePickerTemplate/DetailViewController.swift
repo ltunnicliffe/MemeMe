@@ -36,9 +36,7 @@ class DetailViewController : UIViewController {
     func editorView(){
         let editorViewController = storyboard!.instantiateViewControllerWithIdentifier("EditorViewController") as! EditorViewController
         editorViewController.indexNumber = indexNumber
-        navigationController!.pushViewController(editorViewController, animated: true)
-        tabBarController?.tabBar.hidden = true
-        navigationController?.navigationBar.hidden = true
+        presentViewController(editorViewController, animated: true, completion: nil)
     }
     
 
