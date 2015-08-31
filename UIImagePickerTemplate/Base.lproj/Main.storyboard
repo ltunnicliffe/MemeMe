@@ -309,6 +309,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fwt-YM-aSr"/>
+                    <connections>
+                        <outlet property="collectionView" destination="z5c-Xb-HCa" id="Gkp-Mf-PaD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1PM-op-KZ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

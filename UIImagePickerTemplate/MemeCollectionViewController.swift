@@ -13,11 +13,19 @@ class MemeCollectionViewController : UIViewController, UICollectionViewDelegate,
         
     var memes:[Meme]!
     
+    @IBOutlet var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
         memes = applicationDelegate.memes
+        collectionView.reloadData()
+
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        collectionView.reloadData()
+    }
+
     
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
